@@ -1,5 +1,5 @@
 ﻿using FakeAuth.Profiles;
-using FluentAssertions;
+using Shouldly;
 using System.Security.Claims;
 using Xunit;
 
@@ -13,7 +13,7 @@ public class ExtensionTests
 		var profile = new DefaultProfile();
 		var claims = profile.GetClaims();
 
-		claims.Count.Should().Be(2);
+		claims.Count.ShouldBe(2);
 	}
 
 	[Fact]
@@ -22,7 +22,7 @@ public class ExtensionTests
 		var profile = new DefaultProfile();
 		var keys = profile.GetClaimKeys();
 
-		keys.Count.Should().Be(2);
+		keys.Count.ShouldBe(2);
 	}
 
 	[Fact]
@@ -31,7 +31,7 @@ public class ExtensionTests
 		var profile = new FakeTestProfile();
 		var keys = profile.GetClaimKeys();
 
-		keys.Count.Should().Be(4);
+		keys.Count.ShouldBe(4);
 	}
 
 

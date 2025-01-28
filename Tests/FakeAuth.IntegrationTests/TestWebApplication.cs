@@ -6,28 +6,27 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FakeAuth.IntegrationTests
+namespace FakeAuth.IntegrationTests;
+
+public class TestWebApplication : WebApplicationFactory<Program>
 {
-	public class TestWebApplication : WebApplicationFactory<Program>
+	public string? Host { get; set; }
+	public IList<string> AllowedHosts { get; set; } = ImmutableArray<string>.Empty;
+
+	protected override void ConfigureWebHost(IWebHostBuilder builder)
 	{
-		public string? Host { get; set; }
-		public IList<string> AllowedHosts { get; set; } = ImmutableArray<string>.Empty;
+		base.ConfigureWebHost(builder);
 
-		protected override void ConfigureWebHost(IWebHostBuilder builder)
+		builder.ConfigureServices(services =>
 		{
-			base.ConfigureWebHost(builder);
-
-			builder.ConfigureServices(services =>
+			services.Configure<HostRewriteSettings>(s =>
 			{
-				services.Configure<HostRewriteSettings>(s =>
-				{
-					s.Host = Host;
-				});
-				services.Configure<FakeAuthOptions>(FakeAuthDefaults.SchemaName, opts =>
-				{
-					opts.AllowedHosts = AllowedHosts.Any() ? AllowedHosts : new[] { FakeAuthOptions.DefaultAllowedHost };
-				});
+				s.Host = Host;
 			});
-		}
+			services.Configure<FakeAuthOptions>(FakeAuthDefaults.SchemaName, opts =>
+			{
+				opts.AllowedHosts = AllowedHosts.Any() ? AllowedHosts : new[] { FakeAuthOptions.DefaultAllowedHost };
+			});
+		});
 	}
 }

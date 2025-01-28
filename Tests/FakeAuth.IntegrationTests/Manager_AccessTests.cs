@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using FluentAssertions;
+using Shouldly;
 using System;
 using System.Threading.Tasks;
 using System.Net;
@@ -35,9 +35,9 @@ public class Manager_AccessTests :IDisposable
 		var response = await _client.GetAsync("/api/open");
 
 		// Assert
-		response.StatusCode.Should().Be(HttpStatusCode.OK);
+		response.StatusCode.ShouldBe(HttpStatusCode.OK);
 		var content = await response.Content.ReadAsStringAsync();
-		content.Should().NotBeNullOrEmpty();
+		content.ShouldNotBeNullOrEmpty();
 	}
 
 	[Fact]
@@ -47,9 +47,9 @@ public class Manager_AccessTests :IDisposable
 		var response = await _client.GetAsync("/api/protected");
 
 		// Assert
-		response.StatusCode.Should().Be(HttpStatusCode.OK);
+		response.StatusCode.ShouldBe(HttpStatusCode.OK);
 		var content = await response.Content.ReadAsStringAsync();
-		content.Should().NotBeNullOrEmpty();
+		content.ShouldNotBeNullOrEmpty();
 	}
 
 	[Fact]
@@ -62,9 +62,9 @@ public class Manager_AccessTests :IDisposable
 		var response = await _client.GetAsync("/api/protected");
 
 		// Assert
-		response.StatusCode.Should().Be(HttpStatusCode.OK);
+		response.StatusCode.ShouldBe(HttpStatusCode.OK);
 		var content = await response.Content.ReadAsStringAsync();
-		content.Should().NotBeNullOrEmpty();
+		content.ShouldNotBeNullOrEmpty();
 	}
 
 	public void Dispose()

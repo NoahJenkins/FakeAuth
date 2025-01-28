@@ -1,5 +1,5 @@
 ﻿using FakeAuth.Testing;
-using FluentAssertions;
+using Shouldly;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -31,9 +31,9 @@ public class Manager_AccessTests_with_Profiles : IDisposable
 		var response = await _client.GetAsync("/api/open");
 
 		// Assert
-		response.StatusCode.Should().Be(HttpStatusCode.OK);
+		response.StatusCode.ShouldBe(HttpStatusCode.OK);
 		var content = await response.Content.ReadAsStringAsync();
-		content.Should().NotBeNullOrEmpty();
+		content.ShouldNotBeNullOrEmpty();
 	}
 
 	[Fact]
@@ -43,9 +43,9 @@ public class Manager_AccessTests_with_Profiles : IDisposable
 		var response = await _client.GetAsync("/api/protected");
 
 		// Assert
-		response.StatusCode.Should().Be(HttpStatusCode.OK);
+		response.StatusCode.ShouldBe(HttpStatusCode.OK);
 		var content = await response.Content.ReadAsStringAsync();
-		content.Should().NotBeNullOrEmpty();
+		content.ShouldNotBeNullOrEmpty();
 	}
 
 	public void Dispose()

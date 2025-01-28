@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace FakeAuth.IntegrationTests;
@@ -21,7 +21,7 @@ public sealed class NonLocalhostTests
 
 		var result = await client.GetAsync("/api/open");
 
-		result.StatusCode.Should().Be(expected);
+		result.StatusCode.ShouldBe(expected);
 	}
 
 	[Theory]
@@ -40,6 +40,6 @@ public sealed class NonLocalhostTests
 
 		var result = await client.GetAsync("/api/open");
 
-		result.StatusCode.Should().Be(expected);
+		result.StatusCode.ShouldBe(expected);
 	}
 }
