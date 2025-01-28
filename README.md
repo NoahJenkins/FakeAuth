@@ -99,6 +99,10 @@ In .NET 6 you are no longer required to use a StartUp class. You can still use F
 Please target any PRs to the `Develop` branch.
 
 ## History
+### `version 3.0.0`
+- Updated to .NET `9.0` and droppped support for .NET older than `8.0`
+- Updated Tests away from `FluentAssertions` to `Shouldy`
+
 ### Changes in `version 2.0.0`
 - Removed the obsolete extension methods from `version 1.2.0`. Must use `AddAuthentication().AddFakeAuth()` methods now.
 - Fixed typo in the `HttpClientExtensions` extension class from `SetFakeAuthClaimns` to `SetFakeAuthClaims`

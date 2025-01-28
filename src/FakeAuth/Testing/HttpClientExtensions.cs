@@ -1,7 +1,4 @@
 ﻿using FakeAuth.Profiles;
-using System;
-using System.Dynamic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
